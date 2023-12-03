@@ -19,7 +19,11 @@ public class Perk {
     @CollectionTable(name = "rewards_list", joinColumns = @JoinColumn(name = "perk_id"))
     @Column(name = "reward")
     private List<String> rewards = new ArrayList<>();
+
     private Date estimatedDelivery;
+
+    @ManyToOne
+    private Project project;
 
     public void addReward(String reward) {
         this.rewards.add(reward);

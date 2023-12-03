@@ -7,13 +7,15 @@ import lombok.*;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
-public class Creator {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
+    private String surname;
     private String location;
+    private String phone_number;
 
     @NonNull
     @Column(unique = true)

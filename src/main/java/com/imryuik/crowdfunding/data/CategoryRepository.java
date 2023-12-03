@@ -1,9 +1,9 @@
 package com.imryuik.crowdfunding.data;
 
-import com.imryuik.crowdfunding.entity.Creator;
+import com.imryuik.crowdfunding.entity.Category;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CreatorRepository extends CrudRepository<Creator, Long> {
+public interface CategoryRepository extends CrudRepository<Category, Long> {
 }

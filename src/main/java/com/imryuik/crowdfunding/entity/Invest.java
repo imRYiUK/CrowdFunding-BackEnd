@@ -19,7 +19,7 @@ public class Invest {
     private Project project;
 
     @ManyToOne
-    private Backer backer;
+    private User backer;
 
     @ManyToOne
     private Perk perk;

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -24,17 +23,19 @@ public class Project {
     private Double fundTarget;
     private Date fundStart;
     private Date fundEnd;
-
-    @ElementCollection
-    @CollectionTable(name = "tags_list", joinColumns = @JoinColumn(name = "project_id"))
-    @Column(name = "tags")
-    private List<String> tags = new ArrayList<>();
     private Date createdAt;
 
     @ManyToOne
-    private Creator creator;
+    private User creator;
 
-    public void addTags(String tag) {
+    @ManyToOne
+    private Category category;
+
+    @ManyToMany
+    @JoinColumn(referencedColumnName = "id")
+    private List<Tag> tags = new ArrayList<>();
+
+    public void addTag(Tag tag) {
         this.tags.add(tag);
     }
 }
