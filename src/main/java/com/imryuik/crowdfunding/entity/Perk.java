@@ -9,7 +9,6 @@ import java.util.List;
 
 @Data
 @Entity
-@NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
 public class Perk {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

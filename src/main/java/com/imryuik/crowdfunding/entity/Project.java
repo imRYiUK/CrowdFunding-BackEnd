@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @Data
 //@RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,7 +31,11 @@ public class Project {
     private Category category;
 
     @ManyToMany
-    @JoinColumn(referencedColumnName = "id")
+    @JoinTable(
+            name = "PROJECT_TAG",
+            joinColumns = { @JoinColumn(name = "project_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tag_id") }
+    )
     private List<Tag> tags = new ArrayList<>();
 
     public void addTag(Tag tag) {

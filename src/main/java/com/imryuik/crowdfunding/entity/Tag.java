@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
 public class Tag {
     @Id
     private Long id;

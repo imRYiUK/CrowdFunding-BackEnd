@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PUBLIC,force = true)
 public class Invest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
