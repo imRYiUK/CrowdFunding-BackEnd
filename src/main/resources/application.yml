@@ -15,7 +15,9 @@ spring:
     jdbc:
       initialize-schema: always
 
-
+authentication:
+  server:
+    url: http://localhost:8085/api/auth
 
 server:
   error:
