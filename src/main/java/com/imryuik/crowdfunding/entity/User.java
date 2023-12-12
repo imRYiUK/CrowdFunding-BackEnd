@@ -37,6 +37,13 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public String getUsername() {
+        return this.username;
+    }
+    public String getPassword() {
+        return this.username;
+    }
+
     public User(String name, String surname, String phone_number, @NonNull String username, @NonNull String email, @NonNull String password) {
         this.name = name;
         this.surname = surname;

@@ -16,7 +16,7 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/{category_id}")
+    @GetMapping("/public/{category_id}")
     public List<ProjectDTO> getProjectsByCampaign(@PathVariable Long category_id) {
         System.out.println("NULL");
         return projectService.getProjectsByCategory(category_id);
