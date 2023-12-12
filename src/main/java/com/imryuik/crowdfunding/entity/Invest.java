@@ -1,14 +1,8 @@
 package com.imryuik.crowdfunding.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Entity
-@Data
-@RequiredArgsConstructor
 public class Invest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,5 +17,39 @@ public class Invest {
     @ManyToOne
     private Perk perk;
 
-//    private
+    public Invest() {
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public Project getProject() {
+        return this.project;
+    }
+
+    public User getBacker() {
+        return this.backer;
+    }
+
+    public Perk getPerk() {
+        return this.perk;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public void setBacker(User backer) {
+        this.backer = backer;
+    }
+
+    public void setPerk(Perk perk) {
+        this.perk = perk;
+    }
+
 }

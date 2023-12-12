@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ProjectService {
 
-    List<ProjectDTO> getProjectsByCategory(Long categoryDto_id);
+    List<ProjectDTO> getProjectsByTag(String tagDto_name);
 }

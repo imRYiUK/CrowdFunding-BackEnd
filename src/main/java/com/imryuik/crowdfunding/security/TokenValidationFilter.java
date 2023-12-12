@@ -15,27 +15,29 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.List;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Component
 public class TokenValidationFilter extends OncePerRequestFilter {
     @Value("${authentication.server.url}")
     private String authenticationServerUrl;
+    private static final List<String> EXCLUDED_URL_PREFIXES = List.of("/project/public");
 
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
+        System.out.println(request);
         String token = extractTokenFromRequest(request);
-        if (request.getHeader("authorization") == null) {
-            response.addHeader("Access-Control-Allow-Origin", "*");
-            response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, PATCH, HEAD");
-            response.addHeader("Access-Control-Allow-Headers", "*");
-            response.addHeader("Access-Control-Allow-Credentials", "true");
-            response.addIntHeader("Access-Control-Max-Age", 10);
-            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        if (request.getHeader("Authorization") == null){
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+            response.setHeader("Access-Control-Allow-Headers", "authorization, content-type, xsrf-token");
+            response.setHeader("Access-Control-Max-Age", "3600");
+            response.setStatus(HttpServletResponse.SC_OK);
         } else {
             if (token != null && validateToken(token)) {
                 System.out.println(token);
@@ -57,7 +59,7 @@ public class TokenValidationFilter extends OncePerRequestFilter {
         auth.put("token", token.split(" ")[1]);
         HttpEntity<String> requestEntity = new HttpEntity<>(auth.toString(), header);
 
-//        System.out.println(token);
+        System.out.println(token);
 
         try {
             ResponseEntity<Boolean> responseEntity = restTemplate.exchange(validationUrl, HttpMethod.POST, requestEntity, Boolean.class);
@@ -75,13 +77,20 @@ public class TokenValidationFilter extends OncePerRequestFilter {
         if (headerNames != null) {
             while (headerNames.hasMoreElements()) {
                 String headerName = headerNames.nextElement();
-                System.out.println(headerName);
                 if ("Authorization".equalsIgnoreCase(headerName)) {
+                    System.out.println(headerName);
                     return request.getHeader(headerName);
                 }
             }
         }
 
         return null;
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        // Specify conditions under which the filter should not be applied
+        String path = request.getServletPath();
+        return EXCLUDED_URL_PREFIXES.stream().anyMatch(path::startsWith);
     }
 }

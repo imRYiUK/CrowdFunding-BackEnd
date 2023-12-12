@@ -1,13 +1,11 @@
 package com.imryuik.crowdfunding.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 public class Perk {
     @Id
@@ -24,7 +22,43 @@ public class Perk {
     @ManyToOne
     private Project project;
 
+    public Perk() {
+    }
+
     public void addReward(String reward) {
         this.rewards.add(reward);
     }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public List<String> getRewards() {
+        return this.rewards;
+    }
+
+    public Date getEstimatedDelivery() {
+        return this.estimatedDelivery;
+    }
+
+    public Project getProject() {
+        return this.project;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setRewards(List<String> rewards) {
+        this.rewards = rewards;
+    }
+
+    public void setEstimatedDelivery(Date estimatedDelivery) {
+        this.estimatedDelivery = estimatedDelivery;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
 }
