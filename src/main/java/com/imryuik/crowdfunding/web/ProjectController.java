@@ -16,14 +16,9 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/public/{tag_name}")
-    public List<ProjectDTO> getProjectsByTag(@PathVariable String tag_name) {
-//        System.out.println("NULL");
-        return projectService.getProjectsByTag(tag_name);
-    }
-
-    @GetMapping("/public")
-    public List<ProjectDTO> getProjects() {
-        return projectService.getProjects();
+    @GetMapping("/{category_id}")
+    public List<ProjectDTO> getProjectsByCampaign(@PathVariable Long category_id) {
+        System.out.println("NULL");
+        return projectService.getProjectsByCategory(category_id);
     }
 }

@@ -1,7 +1,7 @@
 package com.imryuik.crowdfunding.entity;
 
 import jakarta.persistence.*;
-import lombok.NonNull;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+@Data
 @Entity
+@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,21 +21,21 @@ public class User implements UserDetails {
     private String name;
     private String surname;
     private String phone_number;
+
+    @NonNull
+    @Column(unique = true)
     private String username;
+
+    @NonNull
+    @Column(unique = true)
     private String email;
 
+
+    @NonNull
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
 
     public User(String name, String surname, String phone_number, @NonNull String username, @NonNull String email, @NonNull String password) {
         this.name = name;
@@ -41,9 +44,6 @@ public class User implements UserDetails {
         this.username = username;
         this.email = email;
         this.password = password;
-    }
-
-    public User() {
     }
 
     @Override
@@ -70,61 +70,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getSurname() {
-        return this.surname;
-    }
-
-    public String getPhone_number() {
-        return this.phone_number;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public Role getRole() {
-        return this.role;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
 }
