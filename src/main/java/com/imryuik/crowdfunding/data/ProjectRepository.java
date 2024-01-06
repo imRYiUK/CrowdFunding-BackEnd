@@ -14,7 +14,7 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
 //    List<Project> findByCategory_Id(Long category_id);
 //    @Query("")
 @Query(value = "SELECT * FROM project WHERE id IN (SELECT project_id FROM project_tag WHERE tag_id = :propertyValue)", nativeQuery = true)
-    List<Project> findtags(@Param("propertyValue") Long id_tag);
-
+List<Project> findtags(@Param("propertyValue") Long id_tag);
     List<Project> findAll();
+    List<Project> findAllByIsActive(Boolean active);
 }

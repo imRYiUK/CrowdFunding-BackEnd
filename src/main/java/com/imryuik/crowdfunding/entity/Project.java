@@ -23,6 +23,8 @@ public class Project {
     @ManyToOne
     private User creator;
 
+    private Boolean isActive;
+
     @ManyToOne
     private Category category;
 
@@ -33,6 +35,14 @@ public class Project {
             inverseJoinColumns = {@JoinColumn(name = "tag_id")}
     )
     private List<Tag> tags = new ArrayList<>();
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
 
     public Project() {
     }

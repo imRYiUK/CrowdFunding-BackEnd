@@ -17,6 +17,15 @@ public class ProjectDTO {
     private UserGDTO creator;
     private List<TagDTO> tags = new ArrayList<>();
     private CategoryDTO category;
+    private Boolean isActive;
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
 
     public ProjectDTO() {
     }

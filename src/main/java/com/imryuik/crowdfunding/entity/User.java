@@ -19,22 +19,20 @@ public class User implements UserDetails {
     private String surname;
     private String phone_number;
 
-    @NonNull
     @Column(unique = true)
     private String username;
 
-    @NonNull
     @Column(unique = true)
     private String email;
 
 
-    @NonNull
+    
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User(String name, String surname, String phone_number, @NonNull String username, @NonNull String email, @NonNull String password) {
+    public User(String name, String surname, String phone_number,  String username,  String email,  String password) {
         this.name = name;
         this.surname = surname;
         this.phone_number = phone_number;
@@ -43,7 +41,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public User(@NonNull String username, @NonNull String email, @NonNull String password) {
+    public User( String username,  String email,  String password) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -96,15 +94,15 @@ public class User implements UserDetails {
         return this.phone_number;
     }
 
-    public @NonNull String getUsername() {
+    public  String getUsername() {
         return this.username;
     }
 
-    public @NonNull String getEmail() {
+    public  String getEmail() {
         return this.email;
     }
 
-    public @NonNull String getPassword() {
+    public  String getPassword() {
         return this.password;
     }
 
@@ -128,15 +126,15 @@ public class User implements UserDetails {
         this.phone_number = phone_number;
     }
 
-    public void setUsername(@NonNull String username) {
+    public void setUsername( String username) {
         this.username = username;
     }
 
-    public void setEmail(@NonNull String email) {
+    public void setEmail( String email) {
         this.email = email;
     }
 
-    public void setPassword(@NonNull String password) {
+    public void setPassword( String password) {
         this.password = password;
     }
 
